@@ -4,3 +4,5 @@ postman/
 body.json
 body2.json
 **/node_modules/
+__pycache__/
+*.pyc
