@@ -62,14 +62,15 @@ This was not a theoretical concern — during development, all three Gemini mode
 
 ## What the Agent Implemented
 
-Given the open-ended request, the agent chose a **tags-based organization and search** approach:
+Given the open-ended request, the agent chose a **tags + search** approach, built across two runs:
 
 - Added a `tags: [String]` field to the Note schema (`app/models/note.model.js`)
 - Updated `create` and `update` in the controller to accept and store tags
-- Added a new `findByTag` controller function to retrieve all notes matching a given tag
-- Registered a new `GET /notes/tag/:tag` route
+- Added a `findByTag` controller function to retrieve all notes matching a given tag
+- Added a `search` controller function to find notes by keyword in the title or content (case-insensitive)
+- Registered two new routes: `GET /notes/tag/:tag` and `GET /notes/search/:keyword`
 
-This was a reasonable, minimal interpretation of "better organise and search" for a simple notes app — tags give users a lightweight way to categorize notes, and the tag-lookup endpoint lets them quickly retrieve everything under a given category.
+This was a reasonable, minimal interpretation of "better organise and search" for a simple notes app — tags give users a lightweight way to categorize notes, tag lookup lets them retrieve everything under a category, and keyword search covers free-text lookup across titles and content.
 
 ### API Endpoints (final)
 
@@ -80,7 +81,8 @@ This was a reasonable, minimal interpretation of "better organise and search" fo
 | `GET` | `/notes/:noteId` | Get a single note |
 | `PUT` | `/notes/:noteId` | Update a note |
 | `DELETE` | `/notes/:noteId` | Delete a note |
-| `GET` | `/notes/tag/:tag` | Get all notes with a given tag (new) |
+| `GET` | `/notes/tag/:tag` | Get all notes with a given tag |
+| `GET` | `/notes/search/:keyword` | Search notes by keyword in title/content |
 
 ## Assumptions & Trade-offs
 
@@ -114,8 +116,8 @@ npm start
 
 ## Demo Recording
 
-[Google Drive link — 2-3 min screen recording showing the agent running end-to-end]
+[Watch the demo recording](https://drive.google.com/file/d/1RLXHiCk1-4Y3o-EIL5bOnMQQB4FcAxkZ/view?usp=sharing)
 
 ---
 
-Built by Gaurav for the ConversAllabs Software Developer assignment.# Scoutr
+Built by Gaurav for the ConversAllabs Software Developer assignment.
